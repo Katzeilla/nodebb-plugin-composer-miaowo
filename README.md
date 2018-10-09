@@ -1,11 +1,7 @@
-# Default Composer for NodeBB
+## 喵窝编辑器
 
-This plugin activates the default composer for NodeBB. It is activated by default, but can be swapped out as necessary.
+### 这是运行在 miaowo.org 上的编辑器
 
-## Screenshots
+### 截图 
 
-### Desktop
-![Desktop Composer](screenshots/desktop.png?raw=true)
-
-### Mobile Devices
-![Mobile Composer](screenshots/mobile.png?raw=true)
+![喵窝编辑器截图](screenshot.png)
