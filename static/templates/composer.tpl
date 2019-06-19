@@ -1,46 +1,45 @@
 <div component="composer" class="composer<!-- IF resizable --> resizable<!-- ENDIF resizable --><!-- IF !isTopicOrMain --> reply<!-- ENDIF !isTopicOrMain -->">
 
 	<div class="composer-container">
-		<nav class="navbar navbar-fixed-top mobile-navbar visible-xs visible-sm">
-			<div class="pull-left">
+		<nav class="navbar navbar-fixed-top mobile-navbar hidden-md hidden-lg">
+			<div class="btn-group">
 				<button class="btn btn-sm btn-primary composer-discard" data-action="discard" tabindex="-1"><i class="fa fa-times"></i></button>
+				<button class="btn btn-sm btn-primary composer-minimize" data-action="minimize" tabindex="-1"><i class="fa fa-minus"></i></button>
 			</div>
 			<!-- IF isTopic -->
 			<div class="category-name-container">
 				<span class="category-name"></span> <i class="fa fa-sort"></i>
 			</div>
 			<!-- ENDIF isTopic -->
-			<div class="pull-right">
-				<button class="btn btn-sm btn-primary composer-submit" data-action="post" tabindex="-1"><i class="fa fa-chevron-right"></i></button>
-			</div>
 			<!-- IF !isTopicOrMain -->
 			<h4 class="title">[[topic:composer.replying_to, "{title}"]]</h4>
 			<!-- ENDIF !isTopicOrMain -->
+			<div class="btn-group">
+				<button class="btn btn-sm btn-primary composer-submit" data-action="post" tabindex="-1"><i class="fa fa-chevron-right"></i></button>
+			</div>
 		</nav>
 		<div class="row title-container">
 			<!-- IF showHandleInput -->
 			<div class="col-sm-3 col-md-12">
 				<input class="handle form-control" type="text" tabindex="1" placeholder="[[topic:composer.handle_placeholder]]" value="{handle}" />
 			</div>
-			<div>
-				<!-- IF isTopicOrMain -->
-				<input class="title form-control" type="text" tabindex="1" placeholder="[[topic:composer.title_placeholder]]" value="{title}"/>
-				<!-- ELSE -->
-				<span class="title form-control">[[topic:composer.replying_to, "{title}"]]</span>
-				<!-- ENDIF isTopicOrMain -->
-			</div>
-			<!-- ELSE -->
-			<div>
-				<!-- IF isTopicOrMain -->
-				<input class="title form-control" type="text" tabindex="1" placeholder="[[topic:composer.title_placeholder]]" value="{title}"/>
-				<!-- ELSE -->
-				<span class="title form-control">[[topic:composer.replying_to, "{title}"]]</span>
-				<!-- ENDIF isTopicOrMain -->
-			</div>
 			<!-- ENDIF showHandleInput -->
+			<div>
+				<!-- IF isTopicOrMain -->
+				<input class="title form-control" type="text" tabindex="1" placeholder="[[topic:composer.title_placeholder]]" value="{title}"/>
+				<!-- ELSE -->
+				<span class="title form-control">[[topic:composer.replying_to, "{title}"]]</span>
+				<!-- ENDIF isTopicOrMain -->
+				<ul class="dropdown-menu quick-search-results hidden">
+					<!-- IMPORT partials/quick-search-results.tpl -->
+				</ul>
+			</div>
+
 			<!-- IF isTopic -->
 			<div class="category-list-container hidden-sm hidden-xs"></div>
 			<!-- ENDIF isTopic -->
+
+			<div class="pull-right draft-icon"></div>
 
 			<div class="btn-group pull-right action-bar hidden-sm hidden-xs">
 				<button class="btn btn-default composer-discard" data-action="discard" tabindex="-1"><i class="fa fa-times"></i> [[topic:composer.discard]]</button>
@@ -52,6 +51,16 @@
 		<div class="category-tag-row">
 			<div class="btn-toolbar formatting-bar">
 				<ul class="formatting-group">
+					<!-- BEGIN formatting -->
+						<!-- IF formatting.spacer -->
+						<li class="spacer"></li>
+						<!-- ELSE -->
+						<!-- IF !formatting.mobile -->
+						<li tabindex="-1" data-format="{formatting.name}" title="{formatting.title}"><i class="{formatting.className}"></i></li>
+						<!-- ENDIF !formatting.mobile -->
+						<!-- ENDIF formatting.spacer -->
+					<!-- END formatting -->
+
 					<!--[if gte IE 9]><!-->
 						<!-- IF privileges.upload:post:image -->
 						<li class="img-upload-btn hide" data-format="picture" tabindex="-1" title="[[modules:composer.upload-picture]]">
@@ -64,16 +73,6 @@
 						</li>
 						<!-- ENDIF privileges.upload:post:file -->
 					<!--<![endif]-->
-
-					<!-- BEGIN formatting -->
-						<!-- IF formatting.spacer -->
-						<li class="spacer"></li>
-						<!-- ELSE -->
-						<!-- IF !formatting.mobile -->
-						<li tabindex="-1" data-format="{formatting.name}" title="{formatting.title}"><i class="{formatting.className}"></i></li>
-						<!-- ENDIF !formatting.mobile -->
-						<!-- ENDIF formatting.spacer -->
-					<!-- END formatting -->
 
 					<!-- IF allowTopicsThumbnail -->
 					<li tabindex="-1">
@@ -116,6 +115,7 @@
 					<span class="help hidden">[[modules:composer.compose]] <i class="fa fa-question-circle"></i></span>
 					<span class="toggle-preview hide">[[modules:composer.show_preview]]</span>
 				</div>
+				<div class="pull-right draft-icon hidden-md hidden-lg"></div>
 				<textarea class="write" tabindex="4"></textarea>
 			</div>
 			<div class="hidden-sm hidden-xs preview-container">
